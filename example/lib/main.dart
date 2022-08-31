@@ -3,8 +3,10 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:internal_benefits_library/internal_benefits_library.dart';
+import 'package:internal_benefits_library/internal_views.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -55,7 +57,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: BambaScreen(),
         ),
       ),
     );
