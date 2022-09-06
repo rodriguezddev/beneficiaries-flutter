@@ -14,28 +14,28 @@ import '../models/bamba_user.dart';
 class Utils {
   static SystemUiOverlayStyle darkSystemUiOverlayStyle() {
     return Platform.isAndroid
-        ? const SystemUiOverlayStyle(
-      systemNavigationBarColor: Color(0xFF000000),
-      systemNavigationBarDividerColor: null,
-      statusBarColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.dark,
-    )
-        : SystemUiOverlayStyle.dark;
+      ? const SystemUiOverlayStyle(
+        systemNavigationBarColor: Color(0xFF000000),
+        systemNavigationBarDividerColor: null,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.dark,
+      )
+      : SystemUiOverlayStyle.dark;
   }
 
   static SystemUiOverlayStyle lightSystemUiOverlayStyle() {
     return Platform.isAndroid
-        ? const SystemUiOverlayStyle(
-      systemNavigationBarColor: Color(0xFF000000),
-      systemNavigationBarDividerColor: null,
-      statusBarColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.light,
-      statusBarBrightness: Brightness.dark,
-    )
-        : SystemUiOverlayStyle.light;
+      ? const SystemUiOverlayStyle(
+        systemNavigationBarColor: Color(0xFF000000),
+        systemNavigationBarDividerColor: null,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: Brightness.dark,
+      )
+      : SystemUiOverlayStyle.light;
   }
 
   static Future<Map<String, dynamic>> getOSInfo() async {
@@ -46,8 +46,8 @@ class Utils {
     String platform = kIsWeb
         ? "Web"
         : Platform.isAndroid
-        ? "android"
-        : "ios";
+          ? "android"
+          : "ios";
 
     return {
       "version": version,
@@ -71,6 +71,18 @@ class Utils {
     }
 
     return null;
+  }
+
+  static Future savePointsPrefs(BambaUser user) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    BambaUser? bambaUser = await getUser();
+
+    if (bambaUser == null) {
+      return;
+    }
+
+    bambaUser.bambaBalance = user.bambaBalance;
+    prefs.setString('user', jsonEncode(bambaUser.toJson()));
   }
 
   static int getAge(DateTime birthday) {
@@ -109,6 +121,18 @@ class Utils {
     // save user
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('token', token);
+  }
+
+  static String getLocalizedDate(DateTime? dateTime) {
+   if (dateTime == null) {
+      return 'No date selected';
+    }
+
+    String year = dateTime.year.toString();
+    String month = dateTime.month.toString().padLeft(2, '0');
+    String day = dateTime.day.toString().padLeft(2, '0');
+
+    return "$day-$month-$year";
   }
 
   static Future<Dio> getDio() async {
