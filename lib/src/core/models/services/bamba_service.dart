@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'products/product.dart';
-import 'products/product_description.dart';
+import '../products/product.dart';
+import '../products/product_description.dart';
 
 @JsonSerializable()
 class BambaService extends Product {
@@ -52,33 +52,33 @@ class BambaService extends Product {
     ..brief = json['brief'] as String?
     ..state = json['state'] as String?
     ..validFrom = json['validFrom'] == null
-        ? null
-        : DateTime.parse(json['validFrom'] as String)
+      ? null
+      : DateTime.parse(json['validFrom'] as String)
     ..validTo = json['validTo'] == null
-        ? null
-        : DateTime.parse(json['validTo'] as String)
+      ? null
+      : DateTime.parse(json['validTo'] as String)
     ..canceledAt = json['canceledAt'] == null
-        ? null
-        : DateTime.parse(json['canceledAt'] as String)
+      ? null
+      : DateTime.parse(json['canceledAt'] as String)
     ..certificateLink = json['certificate_link'] as String?
     ..description = (json['description'] as List<dynamic>?)
-        ?.map((e) => ProductDescription.fromJson(e as Map<String, dynamic>))
-        .toList();
+      ?.map((e) => ProductDescription.fromJson(e as Map<String, dynamic>))
+      .toList();
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'slug': slug,
-        'price': price,
-        'terms': terms,
-        'id': id,
-        'sku': sku,
-        'name': name,
-        'image': image,
-        'brief': brief,
-        'state': state,
-        'validFrom': validFrom?.toIso8601String(),
-        'validTo': validTo?.toIso8601String(),
-        'canceledAt': canceledAt?.toIso8601String(),
-        'certificate_link': certificateLink,
-        'description': description,
-      };
+    'slug': slug,
+    'price': price,
+    'terms': terms,
+    'id': id,
+    'sku': sku,
+    'name': name,
+    'image': image,
+    'brief': brief,
+    'state': state,
+    'validFrom': validFrom?.toIso8601String(),
+    'validTo': validTo?.toIso8601String(),
+    'canceledAt': canceledAt?.toIso8601String(),
+    'certificate_link': certificateLink,
+    'description': description,
+  };
 }

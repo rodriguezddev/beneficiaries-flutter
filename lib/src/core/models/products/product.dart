@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 import 'product_description.dart';
 
 @JsonSerializable()
@@ -27,7 +28,16 @@ class Product {
   @JsonKey(name: "description")
   List<ProductDescription>? description;
 
-  Product();
+  Product({
+    this.brief,
+    this.description,
+    this.image,
+    this.name,
+    this.price,
+    this.sku,
+    this.slug,
+    this.terms
+  });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product()
     ..sku = json['sku'] as String?
@@ -37,18 +47,18 @@ class Product {
     ..image = json['image'] as String?
     ..brief = json['brief'] as String?
     ..terms = json['terms'] as String?
-    ..description = (json['description'] as List<dynamic>?)
-        ?.map((e) => ProductDescription.fromJson(e as Map<String, dynamic>))
-        .toList();
+    ..description = (json['description'] as List<ProductDescription>?)
+      ?.map((e) => ProductDescription.fromJson(e as Map<String, dynamic>))
+      .toList();
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'sku': sku,
-        'name': name,
-        'slug': slug,
-        'price': price,
-        'image': image,
-        'brief': brief,
-        'terms': terms,
-        'description': description,
-      };
+    'sku': sku,
+    'name': name,
+    'slug': slug,
+    'price': price,
+    'image': image,
+    'brief': brief,
+    'terms': terms,
+    'description': description,
+  };
 }

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/color_palette.dart';
-import '../../../core/models/bamba_service.dart';
-import '../../../core/models/bamba_user.dart';
+import '../../../core/models/services/bamba_service.dart';
+import '../../../core/models/user/bamba_user.dart';
 import '../../../core/utils/utils.dart';
 import '../../kommons/shared_widgets.dart';
 import 'service_card.dart';

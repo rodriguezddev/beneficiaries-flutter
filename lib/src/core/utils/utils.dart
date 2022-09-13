@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:dio/dio.dart';
 
-import '../models/bamba_user.dart';
+import '../models/user/bamba_user.dart';
 
 class Utils {
   static SystemUiOverlayStyle darkSystemUiOverlayStyle() {

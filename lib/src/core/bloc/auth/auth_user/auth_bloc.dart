@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import '../../../utils/base_status.dart';
 import '../../../repositories/customer_repository.dart';
-import '../../../models/bamba_user.dart';
+import '../../../models/user/bamba_user.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';

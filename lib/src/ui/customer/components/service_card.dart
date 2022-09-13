@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/color_palette.dart';
 import '../../../core/utils/utils.dart';
-import '../../../core/models/bamba_service.dart';
+import '../../../core/models/services/bamba_service.dart';
 
 class ServiceCard extends StatelessWidget {
   const ServiceCard({

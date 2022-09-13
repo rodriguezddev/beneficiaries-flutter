@@ -32,7 +32,7 @@ class BambaUser {
   @JsonKey(name: "token")
   String? token;
 
-  BambaUser({this.name});
+  BambaUser();
 
   factory BambaUser.fromJson(Map<String, dynamic> json) => BambaUser()
     ..id = json['id'] as String?
@@ -42,22 +42,22 @@ class BambaUser {
     ..cellphone = json['cellphone'] as String?
     ..email = json['email'] as String?
     ..birthdate = json['birthdate'] == null
-        ? null
-        : DateTime.parse(json['birthdate'] as String)
+      ? null
+      : DateTime.parse(json['birthdate'] as String)
     ..gender = json['gender'] as String?
     ..bambaBalance = json['bambaBalance'] as String?
     ..token = json['token'] as String?;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        'id': id,
-        'name': name,
-        'lastName': lastName,
-        'secondLastName': secondLastName,
-        'cellphone': cellphone,
-        'email': email,
-        'birthdate': birthdate?.toIso8601String(),
-        'gender': gender,
-        'bambaBalance': bambaBalance,
-        'token': token,
-      };
+    'id': id,
+    'name': name,
+    'lastName': lastName,
+    'secondLastName': secondLastName,
+    'cellphone': cellphone,
+    'email': email,
+    'birthdate': birthdate?.toIso8601String(),
+    'gender': gender,
+    'bambaBalance': bambaBalance,
+    'token': token,
+  };
 }

@@ -8,9 +8,9 @@ import 'package:dio/dio.dart';
 
 import '../../repositories/customer_repository.dart';
 import '../../repositories/product_repository.dart';
-import '../../models/bamba_user.dart';
+import '../../models/user/bamba_user.dart';
 import '../../models/products/product.dart';
-import '../../models/bamba_service.dart';
+import '../../models/services/bamba_service.dart';
 import '../../utils/base_status.dart';
 
 part 'profile_event.dart';

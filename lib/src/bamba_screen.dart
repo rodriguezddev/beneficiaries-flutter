@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/bloc/auth/auth_user/auth_bloc.dart';
 import 'core/locator/service_locator.dart';
-import 'core/models/bamba_user.dart';
+import 'core/models/user/bamba_user.dart';
 import 'ui/customer/profile_screen.dart';
 
 class BambaScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _BambaScreen extends State<BambaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bambaUser = BambaUser(name: "Miguel");
+    final bambaUser = BambaUser();
     bambaUser.birthdate = DateTime.now().subtract(const Duration(days: 365),);
     return MultiBlocProvider(
       providers: [
