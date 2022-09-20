@@ -25,14 +25,10 @@ void setUp() async {
 
   // Repositories
   serviceLocator.registerSingleton<CustomerRepository>(
-    CustomerRepository(
-      customerService: serviceLocator.get<CustomerService>(),
-    ),
+    CustomerRepository(),
   );
 
   serviceLocator.registerSingleton<ProductRepository>(
-    ProductRepository(
-      productService: serviceLocator.get<ProductService>(),
-    ),
+    ProductRepository(),
   );
 }
