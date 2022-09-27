@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:internal_benefits_library/src/core/constants/asset_constants.dart';
 
 class LogoScreen extends StatelessWidget {
   final AnimationController controller;
@@ -14,7 +15,7 @@ class LogoScreen extends StatelessWidget {
           end: 1.0,
         ).animate(controller),
         child: const Image(
-          image: AssetImage('assets/images/logotipo.png'),
+          image: AssetImage(AssetConstants.logo),
           width: 150.0,
         ),
       ),

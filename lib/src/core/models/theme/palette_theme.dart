@@ -45,8 +45,8 @@ class Palette {
       ..headerColor = json['header_color'] as String?
       ..accentControls = json['accent_controls'] as String?
       ..textColor = json['text_color'] as String?
-      ..textColor = json['text_title_color'] as String?
-      ..textTitleColor = json['text_subtitle_color'] as String?;
+      ..textTitleColor = json['text_title_color'] as String?
+      ..textSubTitleColor = json['text_subtitle_color'] as String?;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
     'primary': primaryColor,

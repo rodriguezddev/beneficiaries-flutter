@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/asset_constants.dart';
 import '../../../core/constants/color_palette.dart';
 import '../../../core/models/services/bamba_service.dart';
 import '../../../core/models/user/bamba_user.dart';
@@ -50,7 +50,7 @@ class ProfileContent extends StatelessWidget {
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Image.asset(
-                      'assets/images/logotipo.png',
+                      AssetConstants.logo,
                       width: 106,
                       height: 20,
                     ),
@@ -59,7 +59,7 @@ class ProfileContent extends StatelessWidget {
                     height: 20,
                   ),
                   const CircleAvatar(
-                    backgroundImage: AssetImage("assets/icons/avatar.png"),
+                    backgroundImage: AssetImage(AssetConstants.avatar),
                     backgroundColor: Colors.white,
                     radius: 50,
                   ),

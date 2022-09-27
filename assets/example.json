@@ -1,0 +1,14 @@
+{
+  "palette": {
+    "primary": "18,50,145,1",
+    "secondary": "18,50,145,1",
+    "accent": "255,154,0,1",
+    "header_color": "102,227,71,1",
+    "accent_controls": "102,227,71,1",
+    "text_color": "102,227,71,1",
+    "text_title_color": "102,227,71,1",
+    "text_subtitle_color": "102,227,71,1"
+  },
+
+  "logo_url": "https://www.kindpng.com/picc/m/128-1280187_github-logo-png-github-transparent-png.png"
+}
