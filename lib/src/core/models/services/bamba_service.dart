@@ -39,6 +39,12 @@ class BambaService extends Product {
   @JsonKey(name: "description")
   List<ProductDescription>? description;
 
+  @JsonKey(name: 'products')
+  List<Product>? products;
+
+  @JsonKey(ignore: true)
+  bool fromBundle = false;
+
   BambaService();
 
   factory BambaService.fromJson(Map<String, dynamic> json) => BambaService()
@@ -63,6 +69,9 @@ class BambaService extends Product {
     ..certificateLink = json['certificate_link'] as String?
     ..description = (json['description'] as List<dynamic>?)
       ?.map((e) => ProductDescription.fromJson(e as Map<String, dynamic>))
+      .toList()
+    ..products = (json['products'] as List<dynamic>?)
+      ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
       .toList();
 
   Map<String, dynamic> toJson() => <String, dynamic>{
@@ -80,5 +89,6 @@ class BambaService extends Product {
     'canceledAt': canceledAt?.toIso8601String(),
     'certificate_link': certificateLink,
     'description': description,
+    'products': products,
   };
 }

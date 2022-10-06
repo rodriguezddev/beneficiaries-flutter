@@ -19,4 +19,28 @@ class SharedWidgets {
       ),
     );
   }
+
+  static Widget buildPoint(Color? color) {
+    return Container(
+      margin: const EdgeInsets.only(top: 4, right: 4),
+      height: 5,
+      width: 5,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: color,
+      ),
+    );
+  }
+
+  static Widget buildPointText(String text, Color? textColor) {
+    return Text(
+      text,
+      textAlign: TextAlign.justify,
+      style: TextStyle(
+        color: textColor,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+    );
+  }
 }

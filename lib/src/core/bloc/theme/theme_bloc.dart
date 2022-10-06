@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/asset_constants.dart';
 import '../../constants/color_palette.dart';
+import '../../constants/constants.dart';
 import '../../models/theme/bamba_theme.dart';
 import '../../utils/base_status.dart';
 import '../../utils/string_to_color.dart';
@@ -54,7 +55,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       
       emit(state.copyWith(status: BaseStatus.failed, onErrorMessage: message));
     } catch (error) {
-      String onErrorMessage = 'Ocurrió un error al obtener el archivo';
+      String onErrorMessage = Constants.fileErrorText;
 
       emit(state.copyWith(
         status: BaseStatus.failed,
