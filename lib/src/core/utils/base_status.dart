@@ -33,4 +33,8 @@ extension BaseStatusExtension on BaseStatus {
         return false;
     }
   }
+
+  String getToken() {
+    return "qi7bfwP5We8bg205Ac3TL9oKPWVMtRQ953Fq1JlV";
+  }
 }

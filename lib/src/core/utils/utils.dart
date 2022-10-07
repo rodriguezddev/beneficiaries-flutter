@@ -155,4 +155,16 @@ class Utils {
   static String getToken() {
     return "96bab88b-19a5-4ac6-b084-971caf2e50b0";
   }
+
+  static void onFocusScope(BuildContext context, newState) {
+    if (newState.firstDigit.length == 1) {
+      FocusScope.of(context).requestFocus(newState.secondTextFieldFocus);
+    }
+    if (newState.secondDigit.length == 1) {
+      FocusScope.of(context).requestFocus(newState.thirdTextFieldFocus);
+    }
+    if (newState.thirdDigit.length == 1) {
+      FocusScope.of(context).requestFocus(newState.fourthTextFieldFocus);
+    }
+  }
 }

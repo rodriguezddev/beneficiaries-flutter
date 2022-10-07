@@ -9,5 +9,16 @@ class LogoutEvent extends AuthEvent {}
 
 class AddUserLoggedEvent extends AuthEvent {
   final BambaUser user;
+
   AddUserLoggedEvent({required this.user});
+}
+
+class ValidateUserLoggingEvent extends AuthEvent {
+  final String? cellphone;
+  final String? pin;
+
+  ValidateUserLoggingEvent({
+    required this.pin,
+    required this.cellphone,
+  });
 }
