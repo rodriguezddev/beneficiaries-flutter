@@ -11,7 +11,11 @@ import '../../core/constants/bamba_routes.dart';
 import 'components/confirmation_content.dart';
 
 class ConfirmationView extends StatefulWidget {
-  const ConfirmationView({Key? key}) : super(key: key);
+  const ConfirmationView({
+    Key? key,
+    this.phoneNumber,
+  }) : super(key: key);
+  final String? phoneNumber;
 
   @override
   _ConfirmationView createState() => _ConfirmationView();
@@ -49,11 +53,10 @@ class _ConfirmationView extends State<ConfirmationView> {
             }
 
             if (newState.theCodeIsValid == false) {
-              // TODO: snackbar replacement by showSnackBar method
-              const snackBar = SnackBar(
-                content: Text(Constants.digitLengthErrorText),
+              Utils.showSnackBar(
+                context: context,
+                message: Constants.digitLengthErrorText,
               );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }
 
             return true;
@@ -115,9 +118,9 @@ class _ConfirmationView extends State<ConfirmationView> {
               focusSecondTrue: state.secondTextFieldFocus,
               focusThirdTrue: state.thirdTextFieldFocus,
               focusFourthTrue: state.fourthTextFieldFocus,
-              primaryColor: themeState.primaryColor,
-              accentColor: themeState.accentColor,
-              textColor: themeState.textColor,
+              primaryColor: themeState.primaryColor as Color,
+              accentColor: themeState.accentColor as Color,
+              textColor: themeState.textColor as Color,
             );
           },
         );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import '../../../core/constants/spacings.dart';
 import '../../../core/bloc/product/product_bloc.dart';
 import '../../../core/bloc/theme/theme_bloc.dart';
 import '../../../core/constants/asset_constants.dart';
@@ -63,8 +64,8 @@ class ServiceDescriptionView extends StatelessWidget {
             ),
             shape: const ContinuousRectangleBorder(
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
+                bottomLeft: Radius.circular(Spacings.borderRadius025),
+                bottomRight: Radius.circular(Spacings.borderRadius025),
               ),
             ),
           ),
@@ -163,7 +164,7 @@ class ServiceDescriptionView extends StatelessWidget {
                           ),
                           backgroundColor: state.accentColor,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(Spacings.borderRadius02),
                           ),
                           elevation: 0.0,
                           fixedSize: Size(

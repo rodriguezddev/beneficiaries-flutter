@@ -46,8 +46,8 @@ class Utils {
     String platform = kIsWeb
         ? "Web"
         : Platform.isAndroid
-          ? "android"
-          : "ios";
+            ? "android"
+            : "ios";
 
     return {
       "version": version,
@@ -59,7 +59,12 @@ class Utils {
   static Future saveUserPrefs(BambaUser user) async {
     // save user
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('user', jsonEncode(user.toJson()));
+    prefs.setString(
+      'user',
+      jsonEncode(
+        user.toJson(),
+      ),
+    );
   }
 
   static Future<BambaUser?> getUser() async {
@@ -82,7 +87,12 @@ class Utils {
     }
 
     bambaUser.bambaBalance = user.bambaBalance;
-    prefs.setString('user', jsonEncode(bambaUser.toJson()));
+    prefs.setString(
+      'user',
+      jsonEncode(
+        bambaUser.toJson(),
+      ),
+    );
   }
 
   static int getAge(DateTime birthday) {
@@ -124,7 +134,7 @@ class Utils {
   }
 
   static String getLocalizedDate(DateTime? dateTime) {
-   if (dateTime == null) {
+    if (dateTime == null) {
       return 'No date selected';
     }
 
@@ -153,7 +163,17 @@ class Utils {
   }
 
   static String getToken() {
-    return "96bab88b-19a5-4ac6-b084-971caf2e50b0";
+    return "qi7bfwP5We8bg205Ac3TL9oKPWVMtRQ953Fq1JlV";
+  }
+
+  static showSnackBar({
+    required BuildContext context,
+    required String message,
+  }) {
+    final snackBar = SnackBar(
+      content: Text(message),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   static void onFocusScope(BuildContext context, newState) {

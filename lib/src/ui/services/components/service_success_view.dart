@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import '../../../core/constants/spacings.dart';
 import '../../../core/bloc/profile/profile_bloc.dart';
 import '../../../core/bloc/theme/theme_bloc.dart';
 import '../../../core/constants/asset_constants.dart';
@@ -102,7 +103,7 @@ class ServiceSuccess extends StatelessWidget {
                           ),
                           backgroundColor: stateTheme.accentColor,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(Spacings.borderRadius02),
                           ),
                           elevation: 0.0,
                           fixedSize: Size(

@@ -7,7 +7,10 @@ import 'logo_screen.dart';
 
 class ScreenLoadingLogo extends StatefulWidget {
   final bool isWeb;
-  const ScreenLoadingLogo({Key? key, this.isWeb = false}) : super(key: key);
+  const ScreenLoadingLogo({
+    Key? key,
+    this.isWeb = false,
+  }) : super(key: key);
 
   @override
   _ScreenLoadingLogo createState() => _ScreenLoadingLogo();
@@ -24,11 +27,13 @@ class _ScreenLoadingLogo extends State<ScreenLoadingLogo>
       vsync: this,
     );
 
-    _controller?.addListener(() {
-      if (_controller!.isCompleted) {
-        _controller!.repeat();
-      }
-    });
+    _controller?.addListener(
+      () {
+        if (_controller!.isCompleted) {
+          _controller!.repeat();
+        }
+      },
+    );
     super.initState();
   }
 
@@ -43,15 +48,15 @@ class _ScreenLoadingLogo extends State<ScreenLoadingLogo>
     _controller?.forward();
     return Scaffold(
       body: !kIsWeb
-          ? AnnotatedRegion<SystemUiOverlayStyle>(
-        value: Utils.darkSystemUiOverlayStyle(),
-        child: LogoScreen(
-          controller: _controller!,
+        ? AnnotatedRegion<SystemUiOverlayStyle>(
+          value: Utils.darkSystemUiOverlayStyle(),
+          child: LogoScreen(
+            controller: _controller!,
+          ),
+        )
+        : LogoScreen(
+           controller: _controller!,
         ),
-      )
-          : LogoScreen(
-        controller: _controller!,
-      ),
     );
   }
 }

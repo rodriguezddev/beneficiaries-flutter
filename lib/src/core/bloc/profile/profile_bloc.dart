@@ -33,14 +33,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Future<void> _mapEditProfileEventToState(
     EditProfileEvent event,
     Emitter<ProfileState> emit,
-  ) async  {
-    print(event.userId);
+  ) async {
     emit(state.copyWith(status: BaseStatus.loading));
-    await  Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 5));
     final user = BambaUser();
     user.name = "Daniel";
     user.bambaBalance = "10.00";
-    user.birthdate = DateTime.now().subtract(Duration(days: 10000),);
+    user.birthdate = DateTime.now().subtract(
+      Duration(days: 10000),
+    );
     emit(state.copyWith(status: BaseStatus.success, user: user));
   }
 
@@ -61,7 +62,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       final user = BambaUser();
       user.name = "Mike";
       user.bambaBalance = "10.00";
-      user.birthdate = DateTime.now().subtract(Duration(days: 365),);
+      user.birthdate = DateTime.now().subtract(
+        Duration(days: 365),
+      );
       emit(
         state.copyWith(
           status: BaseStatus.success,

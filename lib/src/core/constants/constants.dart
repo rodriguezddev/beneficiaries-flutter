@@ -7,6 +7,8 @@ class Constants {
     'Ocurrió un error al obtener los productos';
   static const String errorText = 'errors';
   static const String fileErrorText = 'Ocurrió un error al obtener el archivo';
+  static const String phoneErrorText =
+    'El número de telefono debe contener al menos 10 digitos';
 
   // On boarding
   static const String onBoardingText =
@@ -18,6 +20,7 @@ class Constants {
 
   // Profile text constants
   static const String editProfileText = 'Editar perfil';
+  static const String hiredServicesText = 'Mis servicios contratados';
 
   // Buttons texts
   static const String validateCodeButtonText = 'Validar código';
@@ -26,6 +29,7 @@ class Constants {
   static const String readyText = 'Listo';
 
   // Title texts
+  static const String welcomeToText = 'Bienvenido a';
   static const String enterCodeText = 'Ingresa tu código de seguridad';
 
   //Sub title texts
@@ -38,4 +42,16 @@ class Constants {
   static const String mediaTypeKey = 'BALANCE';
   static const String mediaTypeValue = '1';
   static const String totalText = 'Total';
+
+  // Buttons texts
+  static const String sendButtonText = 'Enviar';
+
+  // Register texts
+  static const String sendSmsText =
+    'Te enviaremos por SMS un código de verificación de cuatro digitos.';
+  static const String enterPinText = 'Ingrese su numero de teléfono';
+  static const String enterPhoneText = 'Ingresa tu celular';
+
+  //Placeholder texts
+  static const String cellphonePlaceholderText = '00 0000000000';
 }

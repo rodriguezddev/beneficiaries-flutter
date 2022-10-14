@@ -22,3 +22,8 @@ class ValidateUserLoggingEvent extends AuthEvent {
     required this.cellphone,
   });
 }
+
+class SendPinEvent extends AuthEvent {
+  final String? cellphone;
+  SendPinEvent({required this.cellphone});
+}

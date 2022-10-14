@@ -7,7 +7,6 @@ import '../services/customer_service.dart';
 import '../services/product_service.dart';
 import '../utils/utils.dart';
 
-
 final serviceLocator = GetIt.instance;
 
 void setUp() async {
@@ -24,7 +23,7 @@ void setUp() async {
   );
 
   // Repositories
-  serviceLocator.registerSingleton<CustomerRepository>(
+ serviceLocator.registerSingleton<CustomerRepository>(
     CustomerRepository(),
   );
 

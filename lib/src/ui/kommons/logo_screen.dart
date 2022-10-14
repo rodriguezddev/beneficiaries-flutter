@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:internal_benefits_library/src/core/constants/asset_constants.dart';
+
+import '../../core/constants/asset_constants.dart';
 
 class LogoScreen extends StatelessWidget {
   final AnimationController controller;

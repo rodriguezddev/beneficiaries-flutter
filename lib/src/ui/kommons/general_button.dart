@@ -16,7 +16,7 @@ class GeneralButton extends StatelessWidget {
   final String title;
   final double horizontalPadding;
   final double verticalPadding;
-  final VoidCallback? onPressed;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {

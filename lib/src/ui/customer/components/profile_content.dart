@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/spacings.dart';
+import '../../../core/constants/constants.dart';
 import '../../../core/constants/asset_constants.dart';
 import '../../../core/constants/color_palette.dart';
 import '../../../core/models/services/bamba_service.dart';
@@ -22,6 +24,7 @@ class ProfileContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -29,12 +32,17 @@ class ProfileContent extends StatelessWidget {
           children: [
             Container(
               height: 300,
-              width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.only(top: 40, left: 20, right: 20),
+              width: width,
+              padding: const EdgeInsets.only(
+                top: Spacings.spacing04,
+                left: Spacings.spacing02,
+                right: Spacings.spacing02,
+              ),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(25.0),
-                    bottomLeft: Radius.circular(25.0)),
+                  bottomRight: Radius.circular(Spacings.borderRadius025),
+                  bottomLeft: Radius.circular(Spacings.borderRadius025),
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -48,20 +56,20 @@ class ProfileContent extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width,
+                    width: width,
                     child: Image.asset(
                       AssetConstants.logo,
                       width: 106,
-                      height: 20,
+                      height: Spacings.spacing02,
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: Spacings.spacing02,
                   ),
                   const CircleAvatar(
                     backgroundImage: AssetImage(AssetConstants.avatar),
                     backgroundColor: Colors.white,
-                    radius: 50,
+                    radius: Spacings.spacing05,
                   ),
                   const SizedBox(
                     height: 4,
@@ -89,10 +97,13 @@ class ProfileContent extends StatelessWidget {
               height: 17,
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.symmetric(
+                horizontal: Spacings.spacing02,
+                vertical: 12,
+              ),
+              width: width,
               child: const Text(
-                "Mis servicios contratados",
+                Constants.hiredServicesText,
                 style: TextStyle(
                   color: ColorPalette.dark,
                   fontSize: 18,
@@ -100,13 +111,19 @@ class ProfileContent extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(onPressed: () {
-              if (onCancelService != null) {
-                onCancelService!("Id de prueba");
-              }
-            }, child: Text("Editar perfil"),),
+            TextButton(
+              onPressed: () {
+                if (onCancelService != null) {
+                  // TODO: remove hardcore value
+                  onCancelService!("Id de prueba");
+                }
+              },
+              child: const Text(Constants.editProfileText),
+            ),
             SharedWidgets.drawLineContainer(
-                context, const EdgeInsets.symmetric(vertical: 12)),
+              context,
+              const EdgeInsets.symmetric(vertical: 12),
+            ),
             if (services != null)
               for (var bambaService in services!)
                 Column(
@@ -116,7 +133,9 @@ class ProfileContent extends StatelessWidget {
                       onCancelService: onCancelService,
                     ),
                     SharedWidgets.drawLineContainer(
-                        context, const EdgeInsets.symmetric(vertical: 12)),
+                      context,
+                      const EdgeInsets.symmetric(vertical: 12),
+                    ),
                   ],
                 ),
           ],
