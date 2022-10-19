@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:dio/dio.dart';
 
+import '../../constants/constants.dart';
 import '../../repositories/customer_repository.dart';
 import '../../repositories/product_repository.dart';
 import '../../models/user/bamba_user.dart';
@@ -34,15 +35,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     EditProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    emit(state.copyWith(status: BaseStatus.loading));
-    await Future.delayed(Duration(seconds: 5));
+    emit(
+      state.copyWith(status: BaseStatus.loading),
+    );
+    await Future.delayed(
+      Duration(seconds: 5),
+    );
     final user = BambaUser();
     user.name = "Daniel";
     user.bambaBalance = "10.00";
     user.birthdate = DateTime.now().subtract(
       Duration(days: 10000),
     );
-    emit(state.copyWith(status: BaseStatus.success, user: user));
+    emit(
+      state.copyWith(status: BaseStatus.success, user: user),
+    );
   }
 
   void _mapGetProfileEventToState(
@@ -54,7 +61,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       return;
     }
 
-    emit(state.copyWith(status: BaseStatus.loading));
+    emit(
+      state.copyWith(status: BaseStatus.loading),
+    );
 
     try {
       String token = "token"; //TODO: get token from utils
@@ -74,11 +83,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
     } on DioError catch (error) {
       String message = _onDioError(error);
-      emit(state.copyWith(status: BaseStatus.failed, onErrorMessage: message));
+      emit(
+        state.copyWith(
+          status: BaseStatus.failed,
+          onErrorMessage: message,
+        ),
+      );
     } catch (error) {
-      String onErrorMessage = 'Ocurrió un error al obtener el usuario';
-      emit(state.copyWith(
-          status: BaseStatus.failed, onErrorMessage: onErrorMessage));
+      String onErrorMessage = Constants.userErrorText;
+      emit(
+        state.copyWith(
+          status: BaseStatus.failed,
+          onErrorMessage: onErrorMessage,
+        ),
+      );
     }
   }
 
@@ -88,15 +106,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       case 400:
       case 404:
       case 405:
-        errorMessage = error.response!.data['errors'];
+        errorMessage = error.response!.data[Constants.errorText];
         break;
       case 401:
         //TODO:  implement logout or refresh token
-        errorMessage = error.response!.data['errors'];
+        errorMessage = error.response!.data[Constants.errorText];
         break;
       case 422:
-        errorMessage =
-            error.response!.data['ocurrio un error al obtener el usuario'];
+        errorMessage = error.response!.data[Constants.userErrorText];
         break;
       default:
         errorMessage = error.message;

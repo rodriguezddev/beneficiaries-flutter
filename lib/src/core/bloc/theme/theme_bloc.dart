@@ -22,51 +22,66 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   }
 
   Future<void> _mapGetThemeEventToState(
-    GetTheme event, Emitter<ThemeState> emit,
-    ) async {
+    GetTheme event,
+    Emitter<ThemeState> emit,
+  ) async {
     try {
       final dataLoaded = await _loadJsonData();
       final themeLoaded = BambaTheme.fromJson(dataLoaded);
 
       emit(
-      state.copyWith(
-        bambaTheme: themeLoaded,
-        accentColor: StringToColor.fromString(
-          themeLoaded.palette!.accentColor.toString()),
-        accentControls: StringToColor.fromString(
-          themeLoaded.palette!.accentControls.toString()),
-        primaryColor: StringToColor.fromString(
-          themeLoaded.palette!.primaryColor.toString()),
-        secondaryColor: StringToColor.fromString(
-          themeLoaded.palette!.secondaryColor.toString()),
-        headerColor: StringToColor.fromString(
-          themeLoaded.palette!.headerColor.toString()),
-        textTitleColor: StringToColor.fromString(
-          themeLoaded.palette!.textTitleColor.toString()),
-        textColor: StringToColor.fromString(
-          themeLoaded.palette!.textColor.toString()),
-        textSubTitleColor: StringToColor.fromString(
-          themeLoaded.palette!.textSubTitleColor.toString()),
-        logo: themeLoaded.logoUrl
-      ),
-    );
+        state.copyWith(
+          bambaTheme: themeLoaded,
+          accentColor: StringToColor.fromString(
+            themeLoaded.palette!.accentColor.toString(),
+          ),
+          accentControls: StringToColor.fromString(
+            themeLoaded.palette!.accentControls.toString(),
+          ),
+          primaryColor: StringToColor.fromString(
+            themeLoaded.palette!.primaryColor.toString(),
+          ),
+          secondaryColor: StringToColor.fromString(
+            themeLoaded.palette!.secondaryColor.toString(),
+          ),
+          headerColor: StringToColor.fromString(
+            themeLoaded.palette!.headerColor.toString(),
+          ),
+          textTitleColor: StringToColor.fromString(
+            themeLoaded.palette!.textTitleColor.toString(),
+          ),
+          textColor: StringToColor.fromString(
+            themeLoaded.palette!.textColor.toString(),
+          ),
+          textSubTitleColor: StringToColor.fromString(
+            themeLoaded.palette!.textSubTitleColor.toString(),
+          ),
+          logo: themeLoaded.logoUrl,
+        ),
+      );
     } on DioError catch (error) {
-      String message =_onDioError(error);
-      
-      emit(state.copyWith(status: BaseStatus.failed, onErrorMessage: message));
+      String message = _onDioError(error);
+
+      emit(
+        state.copyWith(
+          status: BaseStatus.failed,
+          onErrorMessage: message,
+        ),
+      );
     } catch (error) {
       String onErrorMessage = Constants.fileErrorText;
 
-      emit(state.copyWith(
-        status: BaseStatus.failed,
-        onErrorMessage: onErrorMessage,
-      ));
+      emit(
+        state.copyWith(
+          status: BaseStatus.failed,
+          onErrorMessage: onErrorMessage,
+        ),
+      );
     }
   }
 
   Future<Map<String, dynamic>> _loadJsonData() async {
-    final jsonText = await rootBundle
-      .loadString(AssetConstants.themeJson);
+    final jsonText = await rootBundle.loadString(AssetConstants.themeJson);
     final valueDecoded = json.decode(jsonText);
 
     return valueDecoded as Map<String, dynamic>;
@@ -74,20 +89,20 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
   String _onDioError(DioError error) {
     String errorMessage = '';
-  
+
     switch (error.response?.statusCode) {
       case 400:
       case 401:
-        errorMessage = error.response!.data['errors'];
+        errorMessage = error.response!.data[Constants.errorText];
         break;
       case 422:
-        errorMessage = error.response!.data['ocurrió un error al obtener el archivo'];
+        errorMessage = error.response!.data[Constants.fileErrorText];
         break;
       default:
         errorMessage = error.message;
         break;
     }
-    
+
     return errorMessage;
   }
 }

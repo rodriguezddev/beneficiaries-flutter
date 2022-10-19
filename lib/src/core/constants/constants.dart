@@ -9,6 +9,7 @@ class Constants {
   static const String fileErrorText = 'Ocurrió un error al obtener el archivo';
   static const String phoneErrorText =
     'El número de telefono debe contener al menos 10 digitos';
+  static const String userErrorText = 'Ocurrió un error al obtener el usuario';
 
   // On boarding
   static const String onBoardingText =

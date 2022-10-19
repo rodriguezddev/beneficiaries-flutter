@@ -1,8 +1,8 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/constants.dart';
@@ -320,7 +320,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       case 401:
       case 404:
       case 405:
-        errorMessage = error.response!.data['errors'];
+        errorMessage = error.response!.data[Constants.errorText];
         break;
       case 422:
         errorMessage =
