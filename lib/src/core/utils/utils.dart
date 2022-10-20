@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:dio/dio.dart';
 
+import '../constants/asset_constants.dart';
 import '../models/user/bamba_user.dart';
 
 class Utils {
@@ -187,4 +188,10 @@ class Utils {
       FocusScope.of(context).requestFocus(newState.fourthTextFieldFocus);
     }
   }
+
+  static const bottomNavigationList = [
+    ['Profile', AssetImage(AssetConstants.user)],
+    ['Services', AssetImage(AssetConstants.verified)],
+    ['Chat', AssetImage(AssetConstants.chat)],
+  ];
 }
