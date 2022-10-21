@@ -60,9 +60,14 @@ class ConfirmationBloc extends Bloc<ConfirmationEvent, ConfirmationState> {
 
     if (code.length == 4) {
       emit(
-        state.copyWith(codeNumber: code, theCodeIsValid: true),
+        state.copyWith(
+          codeNumber: code,
+          theCodeIsValid: true,
+        ),
       );
+      return;
     }
+
     emit(
       state.copyWith(theCodeIsValid: false),
     );

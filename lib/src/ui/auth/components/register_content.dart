@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../kommons/general_icon.dart';
-import 'image_content.dart';
+import '../../kommons/image_content.dart';
 import '../../kommons/text_content.dart';
 import '../../kommons/general_button.dart';
 import '../../kommons/general_input.dart';
@@ -69,7 +69,11 @@ class RegisterContent extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const ImageContent(assets: AssetConstants.cellphone),
+                  const ImageContent(
+                    assets: AssetConstants.cellphone,
+                    width: 126,
+                    height: 110,
+                  ),
                   const SizedBox(height: spacing02),
                   TextContent(
                     title: Constants.enterPhoneText,

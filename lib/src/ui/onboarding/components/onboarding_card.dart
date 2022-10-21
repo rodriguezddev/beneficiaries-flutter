@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../kommons/text_content.dart';
+import '../../kommons/image_content.dart';
 import '../../../core/constants/asset_constants.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/spacings.dart';
 import '../../../core/bloc/theme/theme_bloc.dart';
 import '../../kommons/text_styles.dart';
 
-class OnboardingContentTwo extends StatelessWidget {
-  const OnboardingContentTwo({Key? key}) : super(key: key);
+class OnboardingCard extends StatelessWidget {
+  const OnboardingCard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +27,23 @@ class OnboardingContentTwo extends StatelessWidget {
                   margin: const EdgeInsets.only(
                     left: Spacings.spacing02,
                     right: Spacings.spacing02,
-                    bottom: 50,
+                    bottom: Spacings.spacing05,
                   ),
-                  width: 150,
-                  child: Text(
-                    Constants.benefitPlanText,
-                    style: TextStyle(
-                      color: themeState.primaryColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  width: 200,
+                  child: TextContent(
+                    title: Constants.personalAssistanceText,
+                    textColor: themeState.primaryColor,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                     textAlign: TextAlign.center,
                   ),
                 ),
-                const Image(
-                  image: AssetImage(
-                    AssetConstants.onBoardingBoy,
-                  ),
+                const ImageContent(
+                  assets: AssetConstants.onBoardingGirl,
                   height: 193.0,
                   width: 136.0,
                 ),
-                const SizedBox(height: 18.0),
+                const SizedBox(height: 48.0),
                 SizedBox(
                   height: 95,
                   child: RichText(
@@ -53,7 +51,7 @@ class OnboardingContentTwo extends StatelessWidget {
                     text: TextSpan(
                       children: [
                         TextSpan(
-                          text: Constants.onBoardingTwoText,
+                          text: Constants.onBoardingText,
                           style: TextStyles.buildTextStyle(),
                         ),
                       ],

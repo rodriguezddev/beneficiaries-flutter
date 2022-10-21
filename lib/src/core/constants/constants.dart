@@ -28,16 +28,22 @@ class Constants {
   static const String activeText = 'Activar';
   static const String acceptText = 'Aceptar';
   static const String readyText = 'Listo';
+  static const String continueText = 'Continuar';
+  static const String clickHereText = '\nda click aquí';
 
   // Title texts
   static const String welcomeToText = 'Bienvenido a';
   static const String enterCodeText = 'Ingresa tu código de seguridad';
 
   //Sub title texts
+  static const String productPriceText = 'puntos al mes';
+
+  //Confirmation texts
   static const String securityCodeText =
     'Recibirás un codigo de seguridad al número';
+  static const String newCodeText = 'Hemos enviado un nuevo código a tu teléfono';
+  static const String reSendSecurityCodeText =  'Si no recibiste el código';
   static const String writeCodeText = 'Escríbe tu código';
-  static const String productPriceText = 'puntos al mes';
 
   // Product texts constants
   static const String mediaTypeKey = 'BALANCE';
@@ -55,4 +61,7 @@ class Constants {
 
   //Placeholder texts
   static const String cellphonePlaceholderText = '00 0000000000';
+
+  //Router
+  static const String noRoutesText = 'No route defined for';
 }

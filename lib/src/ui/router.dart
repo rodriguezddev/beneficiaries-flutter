@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import '../core/constants/constants.dart';
+import 'onboarding/onboarding_view.dart';
 import 'home/home_screen.dart';
 import '../core/constants/bamba_routes.dart';
 import 'auth/confirmation_view.dart';
@@ -24,12 +26,16 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           phoneNumber: phoneNumber,
         ),
       );
+    case BambaRoutes.onBoarding:
+      return MaterialPageRoute(
+        builder: (_) => const OnBoardingView(),
+      );
 
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(
           body: Center(
-            child: Text('No route defined for ${settings.name}'),
+            child: Text('${Constants.noRoutesText} ${settings.name}'),
           ),
         ),
       );

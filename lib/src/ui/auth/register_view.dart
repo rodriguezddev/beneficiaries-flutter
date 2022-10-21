@@ -41,6 +41,7 @@ class _RegisterView extends State<RegisterView> {
         if (newState.status == BaseStatus.success) {
           Navigator.of(context).pushReplacementNamed(
             BambaRoutes.confirmation,
+            arguments: newState.phoneNumber,
           );
           return false;
         }
@@ -58,16 +59,6 @@ class _RegisterView extends State<RegisterView> {
         return BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) {
             return BlocBuilder<RegisterBloc, RegisterState>(
-              buildWhen: (previousState, newState) {
-                if (!newState.phoneNumberValid) {
-                  Utils.showSnackBar(
-                    context: context,
-                    message: Constants.phoneErrorText,
-                  );
-                }
-
-                return true;
-              },
               builder: (context, state) {
                 return RegisterContent(
                   getPhone: (String phone) {
@@ -76,6 +67,13 @@ class _RegisterView extends State<RegisterView> {
                     );
                   },
                   sendPin: () {
+                    if (!state.phoneNumberValid) {
+                      Utils.showSnackBar(
+                        context: context,
+                        message: Constants.phoneErrorText,
+                      );
+                      return;
+                    }
                     _authBloc?.add(
                       SendPinEvent(cellphone: state.phoneNumber),
                     );

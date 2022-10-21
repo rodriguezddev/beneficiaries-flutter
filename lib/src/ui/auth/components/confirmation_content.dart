@@ -1,13 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-import 'confirmation_input.dart';
-import 'image_content.dart';
+import '../../kommons/image_content.dart';
 import '../../kommons/general_button.dart';
 import '../../kommons/text_content.dart';
 import '../../../core/constants/asset_constants.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/spacings.dart';
+
+import 'confitmation_richtext.dart';
+import 'confirmation_input.dart';
 
 class ConfirmationContent extends StatelessWidget {
   const ConfirmationContent({
@@ -24,16 +26,21 @@ class ConfirmationContent extends StatelessWidget {
     required this.accentColor,
     required this.textColor,
     this.isValid,
+    this.canSendCode,
+    this.setTime,
+    this.sendPin,
   }) : super(key: key);
 
   final void Function(String codeNumberValid, dynamic getContext)
-      getFirstNumber;
+    getFirstNumber;
   final void Function(String codeNumberValid, dynamic getContext)
-      getSecondNumber;
+    getSecondNumber;
   final void Function(String codeNumberValid, dynamic getContext)
-      getThirdNumber;
+    getThirdNumber;
   final void Function(String codeNumberValid) getFourthNumber;
   final void Function() sendData;
+  final Function()? sendPin;
+  final String? setTime;
   final FocusNode focusSecondTrue;
   final FocusNode focusThirdTrue;
   final FocusNode focusFourthTrue;
@@ -41,6 +48,7 @@ class ConfirmationContent extends StatelessWidget {
   final Color accentColor;
   final Color textColor;
   final bool? isValid;
+  final bool? canSendCode;
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +77,8 @@ class ConfirmationContent extends StatelessWidget {
                 children: [
                   const ImageContent(
                     assets: AssetConstants.code,
+                    width: 126,
+                    height: 110,
                   ),
                   const SizedBox(height: spacing02),
                   TextContent(
@@ -146,7 +156,29 @@ class ConfirmationContent extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // TODO: add code to resend pin
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.only(
+                      top: Spacings.spacing04,
+                      left: Spacings.spacing06,
+                      right: Spacings.spacing06,
+                    ),
+                    child: !canSendCode!
+                      ? Text(
+                         '${Constants.newCodeText} ${setTime!}',
+                           style: TextStyle(
+                             color: accentColor,
+                             fontSize: 16,
+                           ),
+                            textAlign: TextAlign.center,
+                          )
+                        : ConfirmationRichText(
+                            actionText: () async {
+                              await sendPin!();
+                            },
+                          textColor: textColor,
+                        ),
+                  )
                 ],
               ),
             ),

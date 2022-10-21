@@ -4,9 +4,13 @@ class ImageContent extends StatelessWidget {
   const ImageContent ({
     Key? key,
     required this.assets,
+    required this.width,
+    required this.height,
 }) : super (key: key);
 
   final String assets;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +20,8 @@ class ImageContent extends StatelessWidget {
       width: width,
       child: Image.asset(
         assets,
-        width: 126,
-        height: 110,
+        width: width,
+        height: height,
       ),
     );
   }

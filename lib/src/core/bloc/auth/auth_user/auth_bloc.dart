@@ -8,8 +8,6 @@ import '../../../models/user/bamba_user.dart';
 import '../../../constants/constants.dart';
 import '../../../models/confirmation/confirmartion_requets.dart';
 import '../../../utils/utils.dart';
-import '../../../utils/utils.dart';
-import '../../../constants/constants.dart';
 import '../../../models/register/register_requets.dart';
 
 part 'auth_event.dart';
@@ -100,7 +98,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       emit(
-        state.copyWith(status: BaseStatus.success),
+        state.copyWith(
+          status: BaseStatus.success,
+          phoneNumber: cellphone,
+        ),
       );
     } catch (error) {
       emit(
@@ -115,7 +116,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   void _mapValidateUserLoggingEventToState(
     ValidateUserLoggingEvent event,
     Emitter<AuthState> emit,
-    ) async {
+  ) async {
+    emit(
+      state.copyWith(status: BaseStatus.onRequest),
+    );
+
     try {
       final cellphone = event.cellphone;
       final pin = event.pin;
@@ -128,6 +133,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         token,
         pinValidatorData.toJson(),
       );
+
       emit(
         state.copyWith(status: BaseStatus.success),
       );
@@ -141,4 +147,3 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 }
-
