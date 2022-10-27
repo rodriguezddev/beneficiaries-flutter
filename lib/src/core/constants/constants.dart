@@ -59,6 +59,11 @@ class Constants {
   static const String enterPinText = 'Ingrese su numero de teléfono';
   static const String enterPhoneText = 'Ingresa tu celular';
 
+  //Navigation drawer
+  static const String profileText = 'Perfil';
+  static const String serviceText = 'Servicio';
+  static const String supportText = 'Asistencia';
+
   //Placeholder texts
   static const String cellphonePlaceholderText = '00 0000000000';
 
