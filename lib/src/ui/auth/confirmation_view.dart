@@ -75,32 +75,7 @@ class _ConfirmationViewState extends State<ConfirmationView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
-      buildWhen: (previousState, newState) {
-        //TODO: improve this condition to not depend on the phone number
-        if (newState.phoneNumber != '' &&
-            newState.status == BaseStatus.success) {
-          Navigator.of(context).pushReplacementNamed(
-            BambaRoutes.onBoarding,
-          );
-          return false;
-        }
-
-        if (newState.status == BaseStatus.success) {
-          startTimer();
-          canSendCode = false;
-          return false;
-        }
-
-        if (newState.status == BaseStatus.failed) {
-          Utils.showSnackBar(
-            context: context,
-            message: newState.onErrorMessage,
-          );
-        }
-
-        return true;
-      },
-      builder: (context, themeState) {
+      builder: (context, authState) {
         return BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) {
             return BlocBuilder<ConfirmationBloc, ConfirmationState>(
@@ -168,11 +143,31 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                         pin: state.codeNumber,
                       ),
                     );
+
+                    if (authState.phoneNumber != '' &&
+                        authState.status == BaseStatus.success) {
+                      Navigator.of(context).pushReplacementNamed(
+                        BambaRoutes.onBoarding,
+                      );
+                    }
+
+                    if (authState.status == BaseStatus.failed) {
+                      Utils.showSnackBar(
+                        context: context,
+                        message: authState.onErrorMessage,
+                      );
+                    }
                   },
                   sendPin: () {
                     _authBloc?.add(
                       SendPinEvent(cellphone: widget.phoneNumber),
                     );
+
+                    if (authState.status == BaseStatus.success) {
+                      startTimer();
+                      canSendCode = false;
+                      return false;
+                    }
                   },
                   setTime: buildTime(),
                   isValid: state.theCodeIsValid,
