@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import 'home/home_web_view.dart';
 import '../core/constants/constants.dart';
 import 'onboarding/onboarding_view.dart';
 import 'home/home_screen.dart';
@@ -13,7 +14,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case BambaRoutes.home:
       return MaterialPageRoute(
         //TODO:add home view web
-        builder: (_) => /*kIsWeb ? HomeWebView() :*/ const HomeScreen(),
+        builder: (_) => kIsWeb ? HomeWebView() : const HomeScreen(),
       );
     case BambaRoutes.login:
       return MaterialPageRoute(

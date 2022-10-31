@@ -8,6 +8,7 @@ class AssetConstants{
   static const String icLauncherIcon = "packages/internal_benefits_library/assets/icons/ic_launcher_icon.png";
   static const String user = "packages/internal_benefits_library/assets/icons/user.png";
   static const String verified = "packages/internal_benefits_library/assets/icons/verified.png";
+  static const String menu = "packages/internal_benefits_library/assets/icons/menu_icon.png";
 
   //IMAGES CONSTANTS
   static const String activePlan = "packages/internal_benefits_library/assets/images/plan_activacion.png";
