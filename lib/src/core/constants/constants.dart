@@ -30,6 +30,8 @@ class Constants {
   static const String readyText = 'Listo';
   static const String continueText = 'Continuar';
   static const String clickHereText = '\nda click aquí';
+  static const String sendButtonText = 'Enviar';
+  static const String detailsButtonText = 'Ver datalle';
 
   // Title texts
   static const String welcomeToText = 'Bienvenido a';
@@ -41,8 +43,9 @@ class Constants {
   //Confirmation texts
   static const String securityCodeText =
     'Recibirás un codigo de seguridad al número';
-  static const String newCodeText = 'Hemos enviado un nuevo código a tu teléfono';
-  static const String reSendSecurityCodeText =  'Si no recibiste el código';
+  static const String newCodeText =
+    'Hemos enviado un nuevo código a tu teléfono';
+  static const String reSendSecurityCodeText = 'Si no recibiste el código';
   static const String writeCodeText = 'Escríbe tu código';
 
   // Product texts constants
@@ -50,14 +53,26 @@ class Constants {
   static const String mediaTypeValue = '1';
   static const String totalText = 'Total';
 
-  // Buttons texts
-  static const String sendButtonText = 'Enviar';
-
   // Register texts
   static const String sendSmsText =
     'Te enviaremos por SMS un código de verificación de cuatro digitos.';
   static const String enterPinText = 'Ingrese su numero de teléfono';
   static const String enterPhoneText = 'Ingresa tu celular';
+
+  //My services
+  static const String helloText = 'Hola';
+  static const String budgetText = 'Tu presupuesto Bamba es de';
+  static const String pointText = 'Puntos';
+  static const String chooseBenefitsText = 'Elige tus beneficios';
+  static const String activateOrDesactivateText =
+    'Puedes activar y desactivar uno o más beneficios las veces que quieras.';
+  static const String activePlanstext = 'Activos';
+  static const String availableText = 'Disponibles';
+  static const String sureText = 'Si. estoy seguro';
+  static const String notSureText = 'No, regresar';
+  static const String serviceCanceledText = 'Servicio cancelado';
+  static const String acquireText = 'Estás adquiriendo';
+  static const String wantToContinueText = '¿Quieres continuar?';
 
   //Navigation drawer
   static const String profileText = 'Perfil';

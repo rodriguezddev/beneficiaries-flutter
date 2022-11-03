@@ -40,7 +40,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(
       state.copyWith(
         productStatus: BaseStatus.onRequest,
-      ),
+        cancelProductStatus: BaseStatus.initialized),
     );
 
     try {
@@ -50,21 +50,22 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         token: token,
       );
 
+      List<BambaService> newServices = state.myServices;
+
+      state.myServices.forEach(
+        (bambaService) {
+          state.products.removeWhere(
+            (element) => element.sku == bambaService.sku,
+          );
+        },
+      );
+
       emit(
         state.copyWith(
           products: response,
           initialProducts: List.unmodifiable(response),
           productStatus: BaseStatus.success,
-          myServices: state.myServices
-            .map(
-              (bambaService) {
-                state.products.removeWhere(
-                  (element) => element.sku == bambaService.sku,
-                );
-              },
-            )
-            .cast<BambaService>()
-            .toList(),
+          myServices: newServices,
         ),
       );
     } on DioError catch (error) {
@@ -100,7 +101,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     emit(
       state.copyWith(
-        productStatus: BaseStatus.onRequest,
+        buyProductStatus: BaseStatus.onRequest,
       ),
     );
 
@@ -127,19 +128,20 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         order: orderRequest.toJson(),
       );
 
+      List<Product> newProduct = state.products;
+
+      event.productsToActive.forEach(
+        (product) {
+          newProduct.removeWhere(
+            (element) => element.sku == product.sku,
+          );
+        },
+      );
+
       emit(
         state.copyWith(
-          productStatus: BaseStatus.success,
-          products: event.productsToActive
-            .map(
-              (product) {
-                state.products.removeWhere(
-                  (element) => element.sku == product.sku,
-                );
-              },
-            )
-            .cast<BambaService>()
-            .toList(),
+          products: newProduct,
+          buyProductStatus: BaseStatus.success,
         ),
       );
     } on DioError catch (error) {
@@ -147,7 +149,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
       emit(
         state.copyWith(
-          productStatus: BaseStatus.failed,
+          buyProductStatus: BaseStatus.failed,
           onErrorMessage: message,
         ),
       );
@@ -156,7 +158,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
       emit(
         state.copyWith(
-          productStatus: BaseStatus.failed,
+          buyProductStatus: BaseStatus.failed,
           onErrorMessage: onErrorMessage,
         ),
       );
@@ -167,8 +169,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     GetServices event,
     Emitter<ProductState> emit,
   ) async {
-    List<Product>? removedProducts = state.products;
-
     if (state.productStatus == BaseStatus.loading) {
       emit(state);
 
@@ -178,6 +178,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(
       state.copyWith(
         productStatus: BaseStatus.onRequest,
+        buyProductStatus: BaseStatus.initialized,
       ),
     );
 
@@ -200,6 +201,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           productStatus: BaseStatus.success,
         ),
       );
+
+      List<Product> removedProducts = state.products;
 
       for (var bambaService in state.myServices) {
         final product = state.initialProducts.firstWhereOrNull(
@@ -249,8 +252,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     CancelService event,
     Emitter<ProductState> emit,
   ) async {
-    List<BambaService>? myServices;
-
     if (state.productStatus == BaseStatus.loading) {
       emit(state);
 
@@ -259,7 +260,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
     emit(
       state.copyWith(
-        productStatus: BaseStatus.onRequest,
+        cancelProductStatus: BaseStatus.onRequest,
       ),
     );
 
@@ -268,6 +269,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       var skus = {
         'skus': event.bambaService.fromBundle ? [event.bambaService.sku] : []
       };
+
       final userBamba = await Utils.getUser();
 
       if (userBamba == null) {
@@ -281,14 +283,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         body: skus,
       );
 
-      myServices?.removeWhere(
+      var newServices = state.myServices;
+      newServices.removeWhere(
         (element) => element.sku == event.bambaService.sku,
       );
 
       emit(
         state.copyWith(
-          productStatus: BaseStatus.success,
-          myServices: myServices,
+          cancelProductStatus: BaseStatus.success,
+          myServices: newServices,
         ),
       );
     } on DioError catch (error) {
@@ -296,7 +299,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
       emit(
         state.copyWith(
-          productStatus: BaseStatus.failed,
+          cancelProductStatus: BaseStatus.failed,
           onErrorMessage: message,
         ),
       );
@@ -305,7 +308,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 
       emit(
         state.copyWith(
-          productStatus: BaseStatus.failed,
+          cancelProductStatus: BaseStatus.failed,
           onErrorMessage: onErrorMessage,
         ),
       );
@@ -323,8 +326,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         errorMessage = error.response!.data[Constants.errorText];
         break;
       case 422:
-        errorMessage =
-          error.response!.data[Constants.fileErrorText];
+        errorMessage = error.response!.data[Constants.fileErrorText];
         break;
       default:
         errorMessage = error.message;

@@ -9,6 +9,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:dio/dio.dart';
 
+import '../constants/constants.dart';
+import '../../ui/customer/profile_view.dart';
+import '../../ui/my_services/my_services_view.dart';
+import '../../ui/onboarding/onboarding_view.dart';
 import '../constants/asset_constants.dart';
 import '../models/user/bamba_user.dart';
 
@@ -194,4 +198,26 @@ class Utils {
     ['Services', AssetImage(AssetConstants.verified)],
     ['Chat', AssetImage(AssetConstants.chat)],
   ];
+
+  static const List<Widget> widgetOptions = <Widget>[
+    ProfileView(),
+    MyServicesView(),
+    OnBoardingView(),
+  ];
+
+  static String getBambaBalance(String? bambaBalance) =>
+      bambaBalance != null ? bambaBalance.split('.')[0] : "0";
+
+  static String getProductsName(products) {
+    List<String> productsNames = [];
+
+    products.forEach(
+      (key, value) {
+        productsNames.add(
+            "${value["product"].name} por ${getBambaBalance(value["product"].price.toString())} ${Constants.productPriceText}");
+      },
+    );
+
+    return "${Constants.acquireText} ${productsNames.join(", ")},\n ${Constants.wantToContinueText}";
+  }
 }

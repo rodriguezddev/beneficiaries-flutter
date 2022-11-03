@@ -143,9 +143,7 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                         pin: state.codeNumber,
                       ),
                     );
-
-                    if (authState.phoneNumber != '' &&
-                        authState.status == BaseStatus.success) {
+                    if (authState.status == BaseStatus.success) {
                       Navigator.of(context).pushReplacementNamed(
                         BambaRoutes.onBoarding,
                       );

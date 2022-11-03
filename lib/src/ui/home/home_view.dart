@@ -14,6 +14,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeView extends State<HomeView> {
   HomeBloc? _homeBloc;
+  late int pageIndex = 1;
 
   @override
   void initState() {
@@ -33,14 +34,16 @@ class _HomeView extends State<HomeView> {
         return BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             return HomeContent(
-              controller: state.pageController,
-              pageIndex: state.pageIndex,
+              pageIndex: pageIndex,
               setPageIndex: (index) {
                 _homeBloc?.add(
                   SetPageIndexEvent(index: index),
                 );
               },
               onItemTapped: (index) {
+                setState(() {
+                  pageIndex = index;
+                });
                 _homeBloc?.add(
                   OnItemTappedEvent(index: index),
                 );

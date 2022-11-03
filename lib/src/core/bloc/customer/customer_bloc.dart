@@ -13,6 +13,7 @@ part 'customer_event.dart';
 part 'customer_state.dart';
 
 class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
+  final repository = CustomerRepository();
   CustomerBloc() : super(const CustomerState()) {
     on<GetCustomerEvent>(_mapGetCustomerEvent);
   }
@@ -29,13 +30,12 @@ class CustomerBloc extends Bloc<CustomerEvent, CustomerState> {
       String token = Utils.getToken();
       String customerId = event.customerId ?? '';
 
-      void getCustomer(CustomerRepository customerRepository) =>
-          customerRepository.getCustomer(token, customerId);
-
-      BambaUser bambaUser = (getCustomer) as BambaUser;
+    final response = await repository!.getCustomer(token, customerId);
+    BambaUser bambaUser = (response);
       Utils.savePointsPrefs(bambaUser!);
       emit(
-        state.copyWith(status: BaseStatus.success),
+        state.copyWith(status: BaseStatus.success,
+        user: bambaUser),
       );
     } on DioError catch (error) {
       _onDioError(error);

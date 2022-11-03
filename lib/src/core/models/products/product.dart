@@ -47,7 +47,7 @@ class Product {
     ..image = json['image'] as String?
     ..brief = json['brief'] as String?
     ..terms = json['terms'] as String?
-    ..description = (json['description'] as List<ProductDescription>?)
+    ..description = (json['description'] as List<dynamic>?)
       ?.map((e) => ProductDescription.fromJson(e as Map<String, dynamic>))
       .toList();
 

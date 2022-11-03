@@ -34,12 +34,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     OnItemTappedEvent event,
     Emitter<HomeState> emit,
   ) {
-    void jumpToPage(PageController pageController) =>
-        pageController.jumpToPage(event.index);
+    final PageController pageController = PageController(initialPage: 0).jumpToPage(event.index) as PageController;
+
     emit(
       state.copyWith(
         pageIndex: event.index,
-        pageController: jumpToPage,
+        pageController: pageController,
       ),
     );
   }

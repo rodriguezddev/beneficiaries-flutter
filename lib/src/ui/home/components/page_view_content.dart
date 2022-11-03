@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../customer/profile_view.dart';
+import '../../../core/utils/utils.dart';
 
 class PageViewContent extends StatelessWidget {
   const PageViewContent({
     Key? key,
-    required this.controller,
-    required this.setPageIndex,
+    required this.pageIndex
   }) : super(key: key);
 
-  final dynamic controller;
-  final Function(int) setPageIndex;
+  final int pageIndex;
 
   @override
   Widget build(BuildContext context) {
-    return PageView(
-      physics: const NeverScrollableScrollPhysics(),
-      controller: controller,
-      onPageChanged: (index) {
-        setPageIndex(index);
-      },
-      children: const <Widget>[
-        //TODO: add the corresponding views
-        ProfileView(),
-      ],
+    return Center(
+      child: Utils.widgetOptions.elementAt(pageIndex),
     );
   }
 }

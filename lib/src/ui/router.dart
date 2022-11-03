@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import 'customer/profile_view.dart';
 import 'home/home_web_view.dart';
 import '../core/constants/constants.dart';
 import 'onboarding/onboarding_view.dart';
@@ -30,6 +31,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case BambaRoutes.onBoarding:
       return MaterialPageRoute(
         builder: (_) => const OnBoardingView(),
+      );
+
+    case BambaRoutes.profileView:
+      return MaterialPageRoute(
+        builder: (_) => ProfileView(),
       );
 
     default:

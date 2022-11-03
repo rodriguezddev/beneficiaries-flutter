@@ -7,6 +7,7 @@ class BambaRoutes {
   static const String serviceDescription = "serviceDescription";
   static const String serviceSuccess = "serviceSuccess";
   static const String chatWebView = "chatWebView";
+  static const String profileView = "profileView";
   // ONLY WEB ROUTES
   static const String profileWeb = 'profileWeb';
   static const String chatWeb = 'chatWeb';

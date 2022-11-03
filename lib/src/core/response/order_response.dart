@@ -20,8 +20,8 @@ class OrderResponse {
     OrderResponse()
       ..id = json['id'] as String?
       ..state = json['state'] as String?
-      ..createdAt = json['created_at'] as DateTime?
-      ..updatedAt = json['updated_at'] as DateTime?;
+      ..createdAt = DateTime.parse(json['created_at'] as String)
+      ..updatedAt = DateTime.parse(json['updated_at'] as String);
 
   Map<String, dynamic> toJson() => <String, dynamic>{
     'id': id,

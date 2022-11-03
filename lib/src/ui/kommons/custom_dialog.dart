@@ -21,10 +21,10 @@ class CustomDialog {
         ),
         content: content != null
           ? Text(
-              content,
-              textAlign: TextAlign.center,
-            )
-          : null,
+            content,
+            textAlign: TextAlign.center,
+          )
+        : null,
         contentTextStyle: TextStyle(
           color: color,
           fontSize: 16,
@@ -57,7 +57,10 @@ class CustomDialog {
                     ),
                     elevation: 0.0,
                   ),
-                  onPressed: () => handleConfirm(),
+                  onPressed: () => {
+                    handleConfirm(),
+                  Navigator.pop(dialogContext),
+                  },
                   child: Text(
                     textAcceptButton,
                   ),
@@ -85,7 +88,9 @@ class CustomDialog {
                       color: color,
                     ),
                   ),
-                  onPressed: () {Navigator.of(context).pop();},
+                  onPressed: () {
+                    Navigator.pop(dialogContext);
+                  },
                   child: Text(
                     textCancelButton,
                   ),

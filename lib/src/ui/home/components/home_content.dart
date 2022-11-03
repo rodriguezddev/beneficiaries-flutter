@@ -6,7 +6,6 @@ import 'bottom_navigation_bar_item_content.dart';
 class HomeContent extends StatelessWidget {
   const HomeContent({
     Key? key,
-    required this.controller,
     required this.setPageIndex,
     required this.onItemTapped,
     required this.pageIndex,
@@ -14,7 +13,6 @@ class HomeContent extends StatelessWidget {
     required this.accentColor,
   }) : super(key: key);
 
-  final dynamic controller;
   final int pageIndex;
   final Function(int) setPageIndex;
   final Function(int) onItemTapped;
@@ -25,8 +23,7 @@ class HomeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageViewContent(
-        controller: controller,
-        setPageIndex: setPageIndex,
+        pageIndex: pageIndex,
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -52,8 +49,7 @@ class HomeContent extends StatelessWidget {
             primaryColor: primaryColor,
             accentColor: accentColor,
             onItemTapped: onItemTapped,
-            pageIndex: pageIndex,
-          ),
+            pageIndex: pageIndex),
         ),
       ),
     );

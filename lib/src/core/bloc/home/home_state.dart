@@ -2,7 +2,7 @@ part of 'home_bloc.dart';
 
 class HomeState extends Equatable {
   final int pageIndex;
-  dynamic pageController = PageController(initialPage: 1);
+  PageController? pageController = PageController(initialPage: 1);
 
   HomeState({
     this.pageIndex = 1,
@@ -11,7 +11,7 @@ class HomeState extends Equatable {
 
   HomeState copyWith({
     int? pageIndex,
-    dynamic pageController,
+    PageController? pageController,
   }) {
     return HomeState(
       pageIndex: pageIndex ?? this.pageIndex,

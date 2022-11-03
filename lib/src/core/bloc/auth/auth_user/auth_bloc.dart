@@ -129,13 +129,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       pinValidatorData.pin = pin;
       String? token = Utils.getToken();
 
-      await repository!.login(
+      final response = await repository!.login(
         token,
         pinValidatorData.toJson(),
       );
+      Utils.saveUserPrefs(response);
 
       emit(
-        state.copyWith(status: BaseStatus.success),
+        state.copyWith(
+          status: BaseStatus.success,
+          user: response,
+        ),
       );
     } catch (error) {
       emit(
