@@ -3,12 +3,14 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:dio/dio.dart';
 
+import '../../ui/chat/chat_view.dart';
 import '../constants/constants.dart';
 import '../../ui/customer/profile_view.dart';
 import '../../ui/my_services/my_services_view.dart';
@@ -202,7 +204,7 @@ class Utils {
   static const List<Widget> widgetOptions = <Widget>[
     ProfileView(),
     MyServicesView(),
-    OnBoardingView(),
+    ChatView(),
   ];
 
   static String getBambaBalance(String? bambaBalance) =>

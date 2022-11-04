@@ -28,9 +28,10 @@ class Constants {
   static const String activeText = 'Activar';
   static const String acceptText = 'Aceptar';
   static const String readyText = 'Listo';
+  static const String sendButtonText = 'Enviar';
+  static const String startChatText = 'Iniciar chat';
   static const String continueText = 'Continuar';
   static const String clickHereText = '\nda click aquí';
-  static const String sendButtonText = 'Enviar';
   static const String detailsButtonText = 'Ver datalle';
 
   // Title texts
@@ -59,8 +60,12 @@ class Constants {
   static const String enterPinText = 'Ingrese su numero de teléfono';
   static const String enterPhoneText = 'Ingresa tu celular';
 
-  //My services
+  //chat texts
   static const String helloText = 'Hola';
+  static const String needSupportText = '¿Necesitas asistencia?';
+  static const String supportUrlText = 'https://bit.ly/3e0oO6Y';
+  
+  //My services
   static const String budgetText = 'Tu presupuesto Bamba es de';
   static const String pointText = 'Puntos';
   static const String chooseBenefitsText = 'Elige tus beneficios';

@@ -10,10 +10,12 @@ class GeneralButton extends StatelessWidget {
     required this.onPressed,
     this.horizontalPadding = 65,
     this.verticalPadding = 15,
+    this.fixedSize,
   }) : super(key: key);
 
   final Color bgColor;
   final String title;
+  final Size? fixedSize;
   final double horizontalPadding;
   final double verticalPadding;
   final Function() onPressed;
@@ -27,6 +29,7 @@ class GeneralButton extends StatelessWidget {
           vertical: verticalPadding,
         ),
         backgroundColor: bgColor,
+        fixedSize: fixedSize,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             Spacings.borderRadius02,
