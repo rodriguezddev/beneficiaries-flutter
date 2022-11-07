@@ -9,6 +9,7 @@ import 'home/home_screen.dart';
 import '../core/constants/bamba_routes.dart';
 import 'auth/confirmation_view.dart';
 import 'auth/register_view.dart';
+import 'web/chat_web_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -35,7 +36,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 
     case BambaRoutes.profileView:
       return MaterialPageRoute(
-        builder: (_) => ProfileView(),
+        builder: (_) => const ProfileView(),
+      );
+
+    case BambaRoutes.chatWeb:
+      return MaterialPageRoute(
+        builder: (_) => ChatWebScreen(),
       );
 
     default:
