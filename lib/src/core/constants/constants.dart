@@ -20,7 +20,7 @@ class Constants {
   static const String benefitPlanText = 'Plan de beneficios';
 
   // Profile text constants
-  static const String editProfileText = 'Editar perfil';
+  static const String yearsText = 'años';
   static const String hiredServicesText = 'Mis servicios contratados';
 
   // Buttons texts

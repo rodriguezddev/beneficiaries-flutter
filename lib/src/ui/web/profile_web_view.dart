@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../my_services/my_services_view.dart';
-import '../../core/constants/spacings.dart';
 import '../../core/constants/asset_constants.dart';
 import '../customer/profile_view.dart';
 import '../drawer/navigation_drawer.dart';
 
-class HomeWebView extends StatelessWidget {
+class ProfileWebView extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  HomeWebView({Key? key}) : super(key: key);
+  ProfileWebView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +15,9 @@ class HomeWebView extends StatelessWidget {
       drawer: NavigationDrawer(),
       body: Stack(
         children: [
-          const MyServicesView(),
+          const ProfileView(),
           Positioned(
-            top: Spacings.spacing02,
+            top: 20,
             left: 0,
             child: IconButton(
               onPressed: () => _scaffoldKey.currentState?.openDrawer(),

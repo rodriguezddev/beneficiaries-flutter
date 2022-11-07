@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../kommons/screen_loading_logo.dart';
 import '../../core/constants/constants.dart';
 import '../../core/bloc/theme/theme_bloc.dart';
 import '../../core/constants/bamba_routes.dart';
@@ -55,33 +56,47 @@ class _RegisterView extends State<RegisterView> {
 
         return true;
       },
-      builder: (context, themeState) {
+      builder: (context, authState) {
         return BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, themeState) {
             return BlocBuilder<RegisterBloc, RegisterState>(
               builder: (context, state) {
-                return RegisterContent(
-                  getPhone: (String phone) {
-                    _registerBloc?.add(
-                      GetPhoneEvent(cellphone: phone),
+                switch (authState.status) {
+                  case BaseStatus.initialized:
+                  case BaseStatus.failed:
+                  case BaseStatus.success:
+                    return RegisterContent(
+                      getPhone: (String phone) {
+                        _registerBloc?.add(
+                          GetPhoneEvent(cellphone: phone),
+                        );
+                      },
+                      sendPin: () {
+                        if (!state.phoneNumberValid) {
+                          Utils.showSnackBar(
+                            context: context,
+                            message: Constants.phoneErrorText,
+                          );
+                          return;
+                        }
+                        _authBloc?.add(
+                          SendPinEvent(cellphone: state.phoneNumber),
+                        );
+                      },
+                      primaryColor: themeState.primaryColor as Color,
+                      accentColor: themeState.accentColor as Color,
+                      textColor: themeState.textColor as Color,
                     );
-                  },
-                  sendPin: () {
-                    if (!state.phoneNumberValid) {
-                      Utils.showSnackBar(
-                        context: context,
-                        message: Constants.phoneErrorText,
-                      );
-                      return;
-                    }
-                    _authBloc?.add(
-                      SendPinEvent(cellphone: state.phoneNumber),
-                    );
-                  },
-                  primaryColor: themeState.primaryColor as Color,
-                  accentColor: themeState.accentColor as Color,
-                  textColor: themeState.textColor as Color,
-                );
+                  case BaseStatus.onRequest:
+                    return const ScreenLoadingLogo();
+                  case BaseStatus.loading:
+                    return const ScreenLoadingLogo();
+                  case BaseStatus.uninitialized:
+                    return const ScreenLoadingLogo();
+                  default:
+                    //TODO: create an error page
+                    return Container();
+                }
               },
             );
           },

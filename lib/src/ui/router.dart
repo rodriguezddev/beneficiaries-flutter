@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import 'webviews/chat_webview.dart';
+import 'web/profile_web_view.dart';
+import '../core/models/products/product.dart';
+import 'services/components/service_description_view.dart';
 import 'customer/profile_view.dart';
 import 'home/home_web_view.dart';
 import '../core/constants/constants.dart';
@@ -15,7 +19,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case BambaRoutes.home:
       return MaterialPageRoute(
-        //TODO:add home view web
         builder: (_) => kIsWeb ? HomeWebView() : const HomeScreen(),
       );
     case BambaRoutes.login:
@@ -33,7 +36,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         builder: (_) => const OnBoardingView(),
       );
-
+    case BambaRoutes.serviceDescription:
+      final args = settings.arguments as Map<String, dynamic>;
+      final product = args["product"] as Product;
+      final active = args["active"];
+  
+      return MaterialPageRoute(
+        builder: (_) => ServiceDescriptionView(
+          product: product,
+          active: active,
+        ),
+      );
     case BambaRoutes.profileView:
       return MaterialPageRoute(
         builder: (_) => const ProfileView(),
@@ -42,6 +55,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case BambaRoutes.chatWeb:
       return MaterialPageRoute(
         builder: (_) => ChatWebScreen(),
+      );
+    case BambaRoutes.profileWeb:
+      return MaterialPageRoute(
+        builder: (_) => ProfileWebView(),
+      );
+    case BambaRoutes.chatWebView:
+      return MaterialPageRoute(
+        builder: (_) => ChatWebView(),
       );
 
     default:

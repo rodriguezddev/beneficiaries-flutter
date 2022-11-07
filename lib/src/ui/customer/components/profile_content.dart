@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../kommons/text_content.dart';
+import '../../../core/models/products/product.dart';
+import '../../kommons/service_card.dart';
 import '../../../core/constants/spacings.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/asset_constants.dart';
@@ -8,19 +11,26 @@ import '../../../core/models/services/bamba_service.dart';
 import '../../../core/models/user/bamba_user.dart';
 import '../../../core/utils/utils.dart';
 import '../../kommons/shared_widgets.dart';
-import 'service_card.dart';
 
 class ProfileContent extends StatelessWidget {
   const ProfileContent({
     Key? key,
+    required this.headerColor,
+    required this.textColor,
     required this.bambaUser,
-    required this.services,
+    required this.myServices,
+    required this.product,
+    required this.activatedPlans,
     required this.onCancelService,
   }) : super(key: key);
 
+  final Color textColor;
+  final Color headerColor;
   final BambaUser? bambaUser;
-  final List<BambaService>? services;
-  final void Function(String serviceId)? onCancelService;
+  final List<BambaService> myServices;
+  final List<Product> product;
+  final Map<String, dynamic> activatedPlans;
+  final void Function(BambaService)? onCancelService;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +61,7 @@ class ProfileContent extends StatelessWidget {
                     offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
-                color: ColorPalette.headerColor,
+                color: headerColor,
               ),
               child: Column(
                 children: [
@@ -74,21 +84,18 @@ class ProfileContent extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  Text(
-                    "${bambaUser?.name}",
-                    style: const TextStyle(
-                      color: ColorPalette.dark,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  TextContent(
+                    title: "${bambaUser?.name}",
+                    textColor: textColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
-                  Text(
-                    "${bambaUser == null ? 0 : Utils.getAge(bambaUser!.birthdate!)} años ",
-                    style: const TextStyle(
-                      color: ColorPalette.dark,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  TextContent(
+                    title:
+                      "${bambaUser == null ? 0 : Utils.getAge(bambaUser!.birthdate!)} ${Constants.yearsText}",
+                    textColor: textColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
                   ),
                 ],
               ),
@@ -102,35 +109,30 @@ class ProfileContent extends StatelessWidget {
                 vertical: 12,
               ),
               width: width,
-              child: const Text(
-                Constants.hiredServicesText,
-                style: TextStyle(
-                  color: ColorPalette.dark,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: TextContent(
+                title: Constants.hiredServicesText,
+                textColor: textColor,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
               ),
-            ),
-            TextButton(
-              onPressed: () {
-                if (onCancelService != null) {
-                  // TODO: remove hardcore value
-                  onCancelService!("Id de prueba");
-                }
-              },
-              child: const Text(Constants.editProfileText),
             ),
             SharedWidgets.drawLineContainer(
               context,
               const EdgeInsets.symmetric(vertical: 12),
             ),
-            if (services != null)
-              for (var bambaService in services!)
+            if (myServices != null)
+              for (var service in myServices!)
                 Column(
                   children: [
                     ServiceCard(
-                      bambaService: bambaService,
-                      onCancelService: onCancelService,
+                      cancel: true,
+                      activatedPlans: activatedPlans,
+                      product: service,
+                      active: true,
+                      bambaService: service,
+                      cancelPlan: (service) {
+                        onCancelService!(service);
+                      },
                     ),
                     SharedWidgets.drawLineContainer(
                       context,

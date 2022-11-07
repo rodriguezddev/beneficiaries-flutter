@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../kommons/screen_loading_logo.dart';
 import '../../core/utils/base_status.dart';
 import '../../core/constants/constants.dart';
 import '../../core/utils/utils.dart';
@@ -92,91 +93,105 @@ class _ConfirmationViewState extends State<ConfirmationView> {
                 return true;
               },
               builder: (context, state) {
-                return ConfirmationContent(
-                  getFirstNumber: (
-                    String codeNumberValid,
-                    getContext,
-                  ) {
-                    _confirmationBloc?.add(
-                      GetFirstDigitEvent(
-                        firstDigit: codeNumberValid,
-                        context: getContext,
-                      ),
-                    );
-                  },
-                  getSecondNumber: (
-                    String codeNumberValid,
-                    getContext,
-                  ) {
-                    _confirmationBloc?.add(
-                      GetSecondDigitEvent(
-                        secondDigit: codeNumberValid,
-                        context: getContext,
-                      ),
-                    );
-                  },
-                  getThirdNumber: (
-                    String codeNumberValid,
-                    getContext,
-                  ) {
-                    _confirmationBloc?.add(
-                      GetThirdDigitEvent(
-                        thirdDigit: codeNumberValid,
-                        context: getContext,
-                      ),
-                    );
-                  },
-                  getFourthNumber: (String codeNumberValid) {
-                    _confirmationBloc?.add(
-                      GetFourthDigitEvent(
-                        firstDigit: state.firstDigit,
-                        secondDigit: state.secondDigit,
-                        thirdDigit: state.thirdDigit,
-                        fourthDigit: codeNumberValid,
-                      ),
-                    );
-                  },
-                  sendData: () {
-                    _authBloc?.add(
-                      ValidateUserLoggingEvent(
-                        cellphone: widget.phoneNumber,
-                        pin: state.codeNumber,
-                      ),
-                    );
-                    if (authState.status == BaseStatus.success) {
-                      Navigator.of(context).pushReplacementNamed(
-                        BambaRoutes.onBoarding,
-                      );
-                    }
+                switch (authState.status) {
+                  case BaseStatus.initialized:
+                  case BaseStatus.failed:
+                  case BaseStatus.success:
+                    return ConfirmationContent(
+                      getFirstNumber: (
+                        String codeNumberValid,
+                        getContext,
+                      ) {
+                        _confirmationBloc?.add(
+                          GetFirstDigitEvent(
+                            firstDigit: codeNumberValid,
+                            context: getContext,
+                          ),
+                        );
+                      },
+                      getSecondNumber: (
+                        String codeNumberValid,
+                        getContext,
+                      ) {
+                        _confirmationBloc?.add(
+                          GetSecondDigitEvent(
+                            secondDigit: codeNumberValid,
+                            context: getContext,
+                          ),
+                        );
+                      },
+                      getThirdNumber: (
+                        String codeNumberValid,
+                        getContext,
+                      ) {
+                        _confirmationBloc?.add(
+                          GetThirdDigitEvent(
+                            thirdDigit: codeNumberValid,
+                            context: getContext,
+                          ),
+                        );
+                      },
+                      getFourthNumber: (String codeNumberValid) {
+                        _confirmationBloc?.add(
+                          GetFourthDigitEvent(
+                            firstDigit: state.firstDigit,
+                            secondDigit: state.secondDigit,
+                            thirdDigit: state.thirdDigit,
+                            fourthDigit: codeNumberValid,
+                          ),
+                        );
+                      },
+                      sendData: () {
+                        _authBloc?.add(
+                          ValidateUserLoggingEvent(
+                            cellphone: widget.phoneNumber,
+                            pin: state.codeNumber,
+                          ),
+                        );
+                        if (authState.status == BaseStatus.success) {
+                          Navigator.of(context).pushReplacementNamed(
+                            BambaRoutes.onBoarding,
+                          );
+                        }
 
-                    if (authState.status == BaseStatus.failed) {
-                      Utils.showSnackBar(
-                        context: context,
-                        message: authState.onErrorMessage,
-                      );
-                    }
-                  },
-                  sendPin: () {
-                    _authBloc?.add(
-                      SendPinEvent(cellphone: widget.phoneNumber),
-                    );
+                        if (authState.status == BaseStatus.failed) {
+                          Utils.showSnackBar(
+                            context: context,
+                            message: authState.onErrorMessage,
+                          );
+                        }
+                      },
+                      sendPin: () {
+                        _authBloc?.add(
+                          SendPinEvent(cellphone: widget.phoneNumber),
+                        );
 
-                    if (authState.status == BaseStatus.success) {
-                      startTimer();
-                      canSendCode = false;
-                      return false;
-                    }
-                  },
-                  setTime: buildTime(),
-                  isValid: state.theCodeIsValid,
-                  focusSecondTrue: state.secondTextFieldFocus,
-                  focusThirdTrue: state.thirdTextFieldFocus,
-                  focusFourthTrue: state.fourthTextFieldFocus,
-                  primaryColor: themeState.primaryColor as Color,
-                  accentColor: themeState.accentColor as Color,
-                  textColor: themeState.textColor as Color,
-                  canSendCode: canSendCode,
-                );
+                        if (authState.status == BaseStatus.success) {
+                          startTimer();
+                          canSendCode = false;
+                          return false;
+                        }
+                      },
+                      setTime: buildTime(),
+                      isValid: state.theCodeIsValid,
+                      focusSecondTrue: state.secondTextFieldFocus,
+                      focusThirdTrue: state.thirdTextFieldFocus,
+                      focusFourthTrue: state.fourthTextFieldFocus,
+                      primaryColor: themeState.primaryColor as Color,
+                      accentColor: themeState.accentColor as Color,
+                      textColor: themeState.textColor as Color,
+                      canSendCode: canSendCode,
+                    );
+                  case BaseStatus.onRequest:
+                    return const ScreenLoadingLogo();
+                  case BaseStatus.loading:
+                    return const ScreenLoadingLogo();
+                  case BaseStatus.uninitialized:
+                    return const ScreenLoadingLogo();
+                  default:
+                    //TODO: create an error page
+                    return Container();
+                }
               },
             );
           },

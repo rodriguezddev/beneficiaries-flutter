@@ -6,6 +6,8 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  final PageController _pageController = PageController(initialPage: 1);
+
   HomeBloc() : super(HomeState(pageController: PageController())) {
     on<SetPageIndexEvent>(_mapSetPageIndexEventToState);
     on<ResetEvent>(_mapResetEventToState);
@@ -34,13 +36,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     OnItemTappedEvent event,
     Emitter<HomeState> emit,
   ) {
-    final PageController pageController = PageController(initialPage: 0).jumpToPage(event.index) as PageController;
+    if (_pageController.hasClients) {
+      final PageController pageController =
+        _pageController.jumpToPage(event.index) as PageController;
 
-    emit(
-      state.copyWith(
-        pageIndex: event.index,
-        pageController: pageController,
-      ),
-    );
+      emit(
+        state.copyWith(
+          pageIndex: event.index,
+          pageController: pageController,
+        ),
+      );
+    }
   }
 }

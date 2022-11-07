@@ -16,7 +16,7 @@ import '../../../core/models/services/bamba_service.dart';
 import '../../kommons/image_content.dart';
 import '../../kommons/shared_widgets.dart';
 
-import 'service_card.dart';
+import '../../kommons/service_card.dart';
 
 class MyServicesContent extends StatelessWidget {
   const MyServicesContent({
@@ -124,13 +124,7 @@ class MyServicesContent extends StatelessWidget {
                     activatedPlans: activatedPlans,
                     product: service,
                     active: true,
-                    accentControls: accentControls,
-                    primaryColor: primaryColor,
-                    textColor: textColor,
-                    accentColor: accentColor,
-                    subtitleTextColor: subtitleTextColor,
                     bambaService: service,
-                    productStatus: productStatus,
                     cancelPlan: (service) {
                       cancelPlan!(service);
                     },
@@ -168,11 +162,6 @@ class MyServicesContent extends StatelessWidget {
                     activatedPlans: activatedPlans,
                     product: products,
                     active: false,
-                    accentControls: accentControls,
-                    subtitleTextColor: subtitleTextColor,
-                    accentColor: accentColor,
-                    textColor: textColor,
-                    primaryColor: textColor,
                     cancel: false,
                   ),
                   SharedWidgets.drawLineContainer(

@@ -66,18 +66,16 @@ class ActiveServiceButtonView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5.0),
               ),
             ),
-            onPressed: activatedPlans.isEmpty
-              ? null
-              : () => {
-                CustomDialog.showCustomDialog(
-                  context: context,
-                  title: Utils.getProductsName(activatedPlans),
-                  textAcceptButton: Constants.sureText,
-                  textCancelButton: Constants.notSureText,
-                  handleConfirm: () {
+            onPressed: () => {
+              CustomDialog.showCustomDialog(
+                context: context,
+                title: Utils.getProductsName(activatedPlans),
+                textAcceptButton: Constants.sureText,
+                textCancelButton: Constants.notSureText,
+                handleConfirm: () {
                   handleBuyProduct();
                 },
-                  color: primaryColor as Color,
+                color: primaryColor as Color,
               )
             },
             child: const Text(Constants.activeText),

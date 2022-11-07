@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/bloc/profile/profile_bloc.dart';
 import 'core/bloc/customer/customer_bloc.dart';
 import 'core/bloc/product/product_bloc.dart';
 import 'core/constants/bamba_routes.dart';
@@ -54,9 +53,6 @@ class _BambaScreen extends State<BambaScreen> {
         ),
         BlocProvider(
           create: (_) => CustomerBloc(),
-        ),
-        BlocProvider(
-          create: (_) => ProfileBloc(),
         ),
       ],
       child: const MaterialApp(

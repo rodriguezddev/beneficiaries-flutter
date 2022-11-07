@@ -201,7 +201,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
           productStatus: BaseStatus.success,
         ),
       );
-
       List<Product> removedProducts = state.products;
 
       for (var bambaService in state.myServices) {

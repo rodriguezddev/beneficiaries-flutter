@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/bloc/profile/profile_bloc.dart';
+import '../../core/bloc/customer/customer_bloc.dart';
 import 'profile_view.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  BlocProvider(
-      create: (_) => ProfileBloc(),
+      create: (_) => CustomerBloc(),
       child: const ProfileView(),
     );
   }
